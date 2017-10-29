@@ -45,12 +45,20 @@
 		</p>
 		
 		</div>
-		<input type = "text" id= "mapSearch" placeholder="Enter Destination Here">
+		<!-- <input type = "text" id= "mapSearch" placeholder="Enter Destination Here"> -->
+		<select id = "select">
+		  <option value="choose">Choose a Dream Destination</option>
+		  <option value="amsterdam">Amsterdam, Netherlands</option>
+		  <option value="denpasar">Denpasar, Bali</option>
+		  <option value="mykonos">Mykonos, Greece</option>
+		  <option value="newyork">New York, USA</option>
+		</select>
 		<div id="googleMap" style="width:80%;height:700px;margin-top: 50px;margin-left: 150px;"></div>
 
 		<script>
 
 			function myMap() {
+				//var select = getElementById("select"), var array = ["Amsterdam, Netherlands", "Denpasar, Bali", "Mykonos, Greece", "New York, USA"];
 				navigator.geolocation.getCurrentPosition(function(position) {
   					var mapProp= {
 				    // center:new google.maps.LatLng(-40.9006, 174.8860),
@@ -62,7 +70,7 @@
 
 					var LatLong = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 					
-					var marker = new google.maps.Marker({
+					var marker1 = new google.maps.Marker({
 			        	position: LatLong,
 			            map: maps,
 			        });
@@ -71,45 +79,68 @@
 					    content: '<p>Your Location</p>'
 					  });
 
-			         marker.addListener('click',function(){
-						infowindow.open(maps,marker);
+			         marker1.addListener('click',function(){
+						infowindow.open(maps,marker1);
 			         });
 					  
-
-					//   google.maps.event.addListener(map, 'click', function(event){
-					//   	addMarker({position: event.LatLng});
-					//   });
-					var search = new google.maps.Map(document.getElementById('mapSearch')); 
-					google.maps.event.addListener(search, function(){
-						var place = search.getPlace();
-					});
-					
-					// var myTrip = [LatLong,amsterdam];
-					// var flightPath = new google.maps.Polyline({
-					//   path: myTrip,
-					//   strokeColor: "#FFFFFF",
-					//   strokeOpacity:0.8,
-					//   strokeWeight:4
+					// var search = new google.maps.Map(document.getElementByValue(amsterdam)); 
+					// google.maps.event.addListener(search, function(){
+					// 	var place = search.getPlace();
 					// });
-					// flightPath.setMap(maps);
+					//var array = array[];
+					
 
-					// var flightPlanCoordinates = [
-			  //         {lat: 37.772, lng: -122.214},
-			  //         {lat: 21.291, lng: -157.821},
-			  //         {lat: -18.142, lng: 178.431},
-			  //         {lat: -27.467, lng: 153.027}
-			  //       ];
-			  //       var flightPath = new google.maps.Polyline({
-			  //         path: flightPlanCoordinates,
-			  //         geodesic: true,
-			  //         strokeColor: '#FF0000',
-			  //         strokeOpacity: 1.0,
-			  //         strokeWeight: 2
-			  //       });
+					 var markers = [
+								{
+									coords:{lat: 52.3702, lng: 4.8952},
+									content: '<p>Amsterdam, Netherlands</p>'
+								},
+								{
+									coords:{lat: 8.6705, lng: 115.2126},
+									content: '<p>Denpasar, Bali</p>'
+								},
+								{
+									coords:{lat: 37.4467, lng: 25.3289},
+									content: '<p>Mykonos, Greece</p>'
+								},
+								{
+									coords:{lat: 40.7128, lng: -74.0060},
+									content: '<p>New York, USA</p>'
+								}
+					];
 
-			  //       flightPath.setMap(maps);
-			  //     }
+					for(var i = 0; i < markers.length; i++){
+						addMarker(markers[i]);
+					}
 
+					function addMarker(props){
+						var marker = new google.maps.Marker({
+							position: props.coords,
+							map: maps,
+							//icon: image;
+						});
+						var infowindow = new google.maps.InfoWindow({
+					    	content: props.content
+					  	});
+						marker.addListener('click', function(){
+							infowindow.open(maps, marker[i]);
+						});
+					}
+
+
+
+					// var line = new google.maps.Polyline({
+					// 	path: [
+					// 		new google.maps.LatLng(-40.9006, 174.8860),
+					// 		new google.maps.LatLng(lat: 52.3702, lng: 4.8952);
+					// 	],
+					// 	strokeColor: "#0000FF",
+					// 	strokeOpacity: 0.8,
+					// 	strokeWeight: 3
+					// });
+					// line.setMap(maps);
+					
+					
 				});
 			}
 

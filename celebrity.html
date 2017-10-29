@@ -120,6 +120,13 @@
 							map: maps,
 							//icon: image;
 						});
+						//Marker.hover:props.content;
+						var infowindow = new google.maps.InfoWindow({
+					    	content: props.content
+					  	});
+						marker.addListener('click', function(){
+							infowindow.open(maps, marker[i]);
+						});
 					}
 				});
 			}
