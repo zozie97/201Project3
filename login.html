@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://www.gstatic.com/firebasejs/4.5.1/firebase.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title> T H R E E   P O I N T   F I V E </title>
+</head><!-- end head tag -->
+<body>
+
+<div id="wrapper">
+
+	<div id="column1">
+	
+		<div id="header">
+			<a href="index.html">
+				<img src="logo.png" alt="THREE POINT FIVE" style="width:auto; height:auto;">
+			</a>
+		</div><!-- end header div -->
+
+
+		<div id="navigation">
+			<ul>
+			
+				<!-- <li><a href="index.html">Home</a></li> -->
+				<li><a href="Description.html">Description</a></li>
+				<li><a href="celebrity.html">Celebrity Separation</a></li>
+				<li><a href="profile.html">My Profile</a></li>
+
+			</ul><!-- end unordered list tag -->
+		</div><!-- end navigation div -->
+
+	</div><!-- end column1 div -->
+
+	<div id="column2">
+		
+
+			<div id="login">
+
+				<br><br><br><br>
+				<h2> LOGIN... </h2>
+
+				<!-- <form> -->
+  					<h4>Enter Your Email:</h4>
+  					<input id = "txtEmail" text-align="center" type="email" placeholder="Enter Here"><br>
+  				<!-- </form> -->
+
+  				<br>
+
+  				<!-- <form> -->
+  					<h4>Enter Your Password:</h4>
+  					<input id = "txtPassword" text-align="center" type="password"  placeholder ="Enter Here"><br>
+  				<!-- </form> -->
+
+  				<br><br>
+
+<!--   				<button type="button">Login</button>
+  				<button type="button">Sign Up</button> -->
+
+				<button id = "btnSignUp" class = "btn btn-secondary">
+					Sign Up
+				</button>
+
+				<button id = "btnLogin" class = "btn btn-action">
+					Log in
+				</button>
+
+				<button id = "btnLogout" class = "btn btn-action hide">
+					Log out
+				</button>
+
+			</div>
+	
+
+		
+	</div><!-- end column2 div -->
+
+	
+</div> <!-- end wrapper div -->
+
+<script>
+		  	// Initialize Firebase
+			var config = {
+			    apiKey: "AIzaSyBuMb05BWuPWqW6NqU6CMo7DCP2F9zjV9A",
+			    authDomain: "three-point-five.firebaseapp.com",
+			    databaseURL: "https://three-point-five.firebaseio.com",
+			    projectId: "three-point-five",
+			    storageBucket: "",
+			    messagingSenderId: "281926553312"
+			  	};
+		  	firebase.initializeApp(config);
+
+			var database = firebase.database();
+
+			// Get Elements
+
+			var txtEmail = document.getElementById('txtEmail');
+			var txtPassword = document.getElementById('txtPassword');
+			var btnLogin = document.getElementById('btnLogin');
+			var btnSignUp = document.getElementById('btnSignUp');
+			var btnLogout = document.getElementById('btnLogout');
+
+			//FirebaseUser user = mAuth.getCurrentUser();
+
+
+			btnLogin.addEventListener('click', e => {
+				// Get email and password
+				var email = txtEmail.value;
+				var password = txtPassword.value;
+				var auth = firebase.auth();
+				// Sign in
+				var promise = auth.signInWithEmailAndPassword(email, password);
+				promise.catch(e => alert(e.message));
+
+				var firebaseRef = firebase.database().ref();
+				//firebaseRef.parent("User").set(userId)
+				firebaseRef.child("Email").set(email);
+				firebaseRef.child("Password").set(password);
+
+			});
+
+			btnSignUp.addEventListener('click', e => {
+				// Get email and password
+				var email = txtEmail.value;
+				var password = txtPassword.value;
+				var auth = firebase.auth();
+				// Sign in
+				var promise = auth.createUserWithEmailAndPassword(email, password);
+				promise.catch(e => alert(e.message));
+			});
+
+			btnLogout.addEventListener('click', e => {
+				firebase.auth().signOut();
+			});
+
+			// function writeUserData(userId, email, password) {
+			// 	  firebase.database().ref('users/' + userId).set({
+			// 	    email: email,
+			// 	    password: password
+			// 	  });
+			// 	}
+
+
+			// Add realtime listener
+			firebase.auth().onAuthStateChanged(firebaseUser => {
+				if(firebaseUser) {
+					console.log(firebaseUser);
+					//alert(firebaseUser);
+					alert('logged in');
+					btnLogout.classList.remove('hide');
+					//writeUserData();
+				}
+				else {
+					//console.log
+					alert('not logged in');
+					btnLogout.classList.add('hide');
+				}
+			});
+
+			
+				//youtube  - TVAC Studio
+
+
+
+
+
+		</script>
+
+</body> <!-- end body tag -->
+</html> <!-- end html tag -->
+
+<!-- hidden div class - .show or .hide -->
+<!-- input field pattern validation -->
+<!-- html5 email input pattern  -->
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+
+<title> T H R E E   P O I N T   F I V E </title>
+</head><!-- end head tag -->
+<body>
+
+<div id="wrapper">
+
+	<div id="column1">
+	
+	<div id="header">
+			<a href="index.html">
+				<img src="logo.png" alt="THREE POINT FIVE" style="width:50%; height:50%;">
+			</a>
+		</div><!-- end header div -->
+
+
+		<div id="navigation">
+			<ul>
+			
+				<li><a href="Description.html">Description</a></li>
+				<li><a href="celebrity.html">Celebrity Separation</a></li>
+				<li><a href="profile.html">My Profile</a></li>
+
+			</ul><!-- end unordered list tag -->
+		</div><!-- end navigation div -->
+
+	</div><!-- end column1 div -->
+
+	 <div id="column2">
+		<br>
+		<h2> PROFILE... </h2>
+
+		<br>
+
+		<p>
+			Scroll down to see your location on a map.
+		</p>
+		
+		</div>
+		<div id="googleMap" style="width:80%;height:700px;margin-top: 50px;margin-left: 150px;"></div>
+
+		<script>
+
+			
+			function myMap() {
+				navigator.geolocation.getCurrentPosition(function(position) {
+  					var mapProp= {
+				    // center:new google.maps.LatLng(-40.9006, 174.8860),
+				    center:new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+				    zoom:2,
+
+					};
+					var maps = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+					var LatLong = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+					
+					var marker = new google.maps.Marker({
+			        	position: LatLong,
+			            map: maps,
+			           // title: 'Hello World!'
+			        });
+
+			         var infowindow = new google.maps.InfoWindow({
+					    content: '<p>Your Location</p>'//'Latitude: ' + location.lat() +'<br>Longitude: ' + location.lng()
+					  });
+
+			         marker.addListener('click',function(){
+						infowindow.open(maps,marker);
+			         });
+					  
+
+					
+					var myTrip = [LatLong,amsterdam];
+					var flightPath = new google.maps.Polyline({
+					  path:myTrip,
+					  strokeColor: "#FFFFFF",
+					  strokeOpacity:0.8,
+					  strokeWeight:4
+					});
+
+				});
+			}
+
+
+		</script>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjE6hwMi4xYFyuZ0h3k5xnfBmqg58YrsY&callback=myMap"></script>
+
+</div> <!-- end wrapper div -->
+
+
+</body> <!-- end body tag -->
+</html> <!-- end html tag -->
+
+
