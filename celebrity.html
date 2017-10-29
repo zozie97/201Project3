@@ -60,7 +60,7 @@
 
 					var maps = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
-					//var image = 'imgs/marker.png';
+					var mark = 'imgs/marker.png';
 					 // var image = {
 				  //         url: 'imgs/marker.png',
 				  //         // This marker is 20 pixels wide by 32 pixels high.
@@ -76,7 +76,7 @@
 					var marker1 = new google.maps.Marker({
 			        	position: LatLong,
 			            map: maps,
-			            //icon: image
+			            icon: mark
 			        });
 
 			        var infowindow1 = new google.maps.InfoWindow({
@@ -118,9 +118,8 @@
 						var marker = new google.maps.Marker({
 							position: props.coords,
 							map: maps,
-							//icon: image;
+							icon: mark
 						});
-						//Marker.hover:props.content;
 						var infowindow = new google.maps.InfoWindow({
 					    	content: props.content
 					  	});
@@ -129,6 +128,7 @@
 						});
 					}
 				});
+
 			}
 
 

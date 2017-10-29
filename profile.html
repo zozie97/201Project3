@@ -68,11 +68,14 @@
 					};
 					var maps = new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
+					var mark = 'imgs/marker.png';
+
 					var LatLong = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 					
 					var marker1 = new google.maps.Marker({
 			        	position: LatLong,
 			            map: maps,
+			            icon: mark
 			        });
 
 			         var infowindow = new google.maps.InfoWindow({
@@ -117,22 +120,23 @@
 						var marker = new google.maps.Marker({
 							position: props.coords,
 							map: maps,
-							//icon: image;
+							icon: mark
 						});
 						var infowindow = new google.maps.InfoWindow({
 					    	content: props.content
 					  	});
 						marker.addListener('click', function(){
-							infowindow.open(maps, marker[i]);
+							infowindow.open(maps[i], marker[i]);
 						});
 					}
-
+					
+				});
 
 
 					// var line = new google.maps.Polyline({
 					// 	path: [
 					// 		new google.maps.LatLng(-40.9006, 174.8860),
-					// 		new google.maps.LatLng(lat: 52.3702, lng: 4.8952);
+					// 		new google.maps.LatLng(52.3702, 4.8952);
 					// 	],
 					// 	strokeColor: "#0000FF",
 					// 	strokeOpacity: 0.8,
@@ -140,8 +144,6 @@
 					// });
 					// line.setMap(maps);
 					
-					
-				});
 			}
 
 
