@@ -26,8 +26,8 @@
 			<ul>
 			
 				<li><a href="Description.html">Description</a></li>
-				<li><a href="celebrity.html">Celebrity Separation</a></li>
-				<li><a href="profile.html">My Profile</a></li>
+				<li><a href="celebrity.html">Friend Locator</a></li>
+				<li><a href="profile.html">Dream Destination Distance</a></li>
 
 			</ul><!-- end unordered list tag -->
 		</div><!-- end navigation div -->
@@ -35,21 +35,21 @@
 	</div><!-- end column1 div -->
 
 	 <div id="column2">
-		<br>
+		
 		<h2> PROFILE... </h2>
 
 		<br>
 
 		<p>
-			Scroll down to see your location on a map.
+			Scroll down to see your location on a map. Then select a random dream desitination and it will place a marker there for you. From there it will calculate the distance between you and this location "as the crow flies" in kilometers.
 		</p>
 		
 		</div>
+		<input type = "text" id= "mapSearch" placeholder="Enter Destination Here">
 		<div id="googleMap" style="width:80%;height:700px;margin-top: 50px;margin-left: 150px;"></div>
 
 		<script>
 
-			
 			function myMap() {
 				navigator.geolocation.getCurrentPosition(function(position) {
   					var mapProp= {
@@ -65,11 +65,10 @@
 					var marker = new google.maps.Marker({
 			        	position: LatLong,
 			            map: maps,
-			           // title: 'Hello World!'
 			        });
 
 			         var infowindow = new google.maps.InfoWindow({
-					    content: '<p>Your Location</p>'//'Latitude: ' + location.lat() +'<br>Longitude: ' + location.lng()
+					    content: '<p>Your Location</p>'
 					  });
 
 			         marker.addListener('click',function(){
@@ -77,14 +76,39 @@
 			         });
 					  
 
-					
-					var myTrip = [LatLong,amsterdam];
-					var flightPath = new google.maps.Polyline({
-					  path:myTrip,
-					  strokeColor: "#FFFFFF",
-					  strokeOpacity:0.8,
-					  strokeWeight:4
+					//   google.maps.event.addListener(map, 'click', function(event){
+					//   	addMarker({position: event.LatLng});
+					//   });
+					var search = new google.maps.Map(document.getElementById('mapSearch')); 
+					google.maps.event.addListener(search, function(){
+						var place = search.getPlace();
 					});
+					
+					// var myTrip = [LatLong,amsterdam];
+					// var flightPath = new google.maps.Polyline({
+					//   path: myTrip,
+					//   strokeColor: "#FFFFFF",
+					//   strokeOpacity:0.8,
+					//   strokeWeight:4
+					// });
+					// flightPath.setMap(maps);
+
+					// var flightPlanCoordinates = [
+			  //         {lat: 37.772, lng: -122.214},
+			  //         {lat: 21.291, lng: -157.821},
+			  //         {lat: -18.142, lng: 178.431},
+			  //         {lat: -27.467, lng: 153.027}
+			  //       ];
+			  //       var flightPath = new google.maps.Polyline({
+			  //         path: flightPlanCoordinates,
+			  //         geodesic: true,
+			  //         strokeColor: '#FF0000',
+			  //         strokeOpacity: 1.0,
+			  //         strokeWeight: 2
+			  //       });
+
+			  //       flightPath.setMap(maps);
+			  //     }
 
 				});
 			}
